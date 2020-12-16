@@ -1,8 +1,10 @@
 package com.renaldysabdo.apigithub.data.di
 
+import com.renaldysabdo.apigithub.data.GithubRepositoryImpl
 import com.renaldysabdo.apigithub.data.service.ApiService
 import com.renaldysabdo.apigithub.data.source.RemoteDataSource
 import com.renaldysabdo.apigithub.data.utils.baseUrl
+import com.renaldysabdo.apigithub.domain.repository.GithubRepository
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.dsl.module
@@ -27,6 +29,9 @@ val networkModule = module {
             .build()
         retrofit.create(ApiService::class.java)
     }
-    single { RemoteDataSource(get()) }
+}
 
+val repositoryModule = module {
+    single { RemoteDataSource(get()) }
+    single <GithubRepository>{ GithubRepositoryImpl(get()) }
 }
