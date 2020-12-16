@@ -4,15 +4,15 @@ plugins {
 }
 
 android {
-    compileSdkVersion 30
-    buildToolsVersion "30.0.2"
+    compileSdkVersion Versions.compileSdk
+    buildToolsVersion Versions.buildTools
 
     defaultConfig {
         applicationId "com.renaldysabdo.apigithub"
-        minSdkVersion 19
-        targetSdkVersion 30
-        versionCode 1
-        versionName "1.0"
+        minSdkVersion Versions.minSdk
+        targetSdkVersion Versions.targetSdk
+        versionCode Releases.versionCode
+        versionName Releases.versionName
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -34,12 +34,40 @@ android {
 
 dependencies {
 
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    implementation 'androidx.core:core-ktx:1.3.2'
-    implementation 'androidx.appcompat:appcompat:1.2.0'
-    implementation 'com.google.android.material:material:1.2.1'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
-    testImplementation 'junit:junit:4.13.1'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+    implementation KotlinLibraries.kotlin
+    implementation AndroidLibraries.appcompat
+    implementation AndroidLibraries.coreKtx
+    implementation AndroidLibraries.materialDesign
+    implementation AndroidLibraries.constraintLayout
+    testImplementation AndroidLibraries.jUnit
+    androidTestImplementation AndroidLibraries.androidxJunit
+    androidTestImplementation AndroidLibraries.espresso
+
+    //retrofit
+    implementation Libraries.retrofit
+    implementation Libraries.converterGson
+    implementation Libraries.okhttp
+
+    //atchitecture component
+    implementation Libraries.lifecycle
+    implementation Libraries.multidex
+    implementation Libraries.legacy
+    implementation Libraries.coroutinesAndroid
+    implementation Libraries.coroutinesCore
+
+    //koin
+    implementation Libraries.koinAndroid
+    implementation Libraries.koinCore
+    implementation Libraries.koinViewModel
+
+    //paging
+    implementation Libraries.pagedList
+
+    //ui
+    implementation Libraries.recyclerview
+    implementation Libraries.cardview
+    implementation Libraries.circleImage
+    implementation Libraries.glide
+    annotationProcessor Libraries.glideCompiler
+
 }

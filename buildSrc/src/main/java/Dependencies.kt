@@ -57,6 +57,15 @@ object Libraries {
     val timber = "com.jakewharton.timber:timber:${Versions.timber}"
     //circle image
     val circleImage = "de.hdodenhof:circleimageview:${Versions.circleImage}"
+    //legacy
+    val legacy = "androidx.legacy:legacy-support-v4:${Versions.legacySupport}"
+    //ui list
+    val recyclerview = "androidx.recyclerview:recyclerview:${Versions.recyclerview}"
+    val cardview = "androidx.cardview:cardview:${Versions.cardview}"
+    //multidex
+    val multidex = "androidx.multidex:multidex:${Versions.multidex}"
+    //lifecycle
+    val lifecycle = "androidx.lifecycle:lifecycle-livedata-ktx:${Versions.lifecycle}"
 }
 
 object KotlinLibraries {
@@ -68,12 +77,7 @@ object AndroidLibraries {
     val materialDesign  = "com.google.android.material:material:${Versions.materialDesign}"
     val coreKtx = "androidx.core:core-ktx:${Versions.coreKtx}"
     val constraintLayout = "androidx.constraintlayout:constraintlayout:${Versions.constraintLayout}"
-    val legacy = "androidx.legacy:legacy-support-v4:${Versions.legacySupport}"
-    val recyclerview = "androidx.recyclerview:recyclerview:${Versions.recyclerview}"
-    val cardview = "androidx.cardview:cardview:${Versions.cardview}"
-    val multidex = "androidx.multidex:multidex:${Versions.multidex}"
     val androidxJunit = "androidx.test.ext:junit:${Versions.androidxJunit}"
     val jUnit = "junit:junit:${Versions.junit}"
     val espresso = "androidx.test.espresso:espresso-core:${Versions.espresso}"
-    val lifecycle = "androidx.lifecycle:lifecycle-livedata-ktx:${Versions.lifecycle}"
 }
