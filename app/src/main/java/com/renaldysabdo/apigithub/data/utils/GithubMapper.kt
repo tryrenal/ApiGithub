@@ -9,6 +9,7 @@ object GithubMapper {
     fun responseToDomain(input : PagingData<UserResponse>) : PagingData<Users> {
         return input.map {
             Users(
+                id = it.id,
                 name = it.name,
                 image = it.avatar
             )
