@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.renaldysabdo.apigithub.databinding.ActivityMainBinding
 import com.renaldysabdo.apigithub.ui.adapter.GithubAdapter
-import com.renaldysabdo.apigithub.ui.adapter.GithubLoadStateAdapter
+import com.renaldysabdo.apigithub.ui.adapter.loadstate.GithubLoadStateAdapter
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.launch

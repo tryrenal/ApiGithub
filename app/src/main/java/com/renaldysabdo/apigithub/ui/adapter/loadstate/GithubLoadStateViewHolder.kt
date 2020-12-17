@@ -1,4 +1,4 @@
-package com.renaldysabdo.apigithub.ui.adapter
+package com.renaldysabdo.apigithub.ui.adapter.loadstate
 
 import android.view.LayoutInflater
 import android.view.View
