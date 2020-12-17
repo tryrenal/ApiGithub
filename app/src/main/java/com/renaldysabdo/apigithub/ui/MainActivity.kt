@@ -30,11 +30,33 @@ class MainActivity : AppCompatActivity() {
         mBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(mBinding.root)
 
-        mBinding.svMain.setQuery("tryrenal", true)
+        setSearchUser()
+        setData()
+        initAdapter()
+    }
 
+    private fun initAdapter(){
         val layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
         mBinding.recyclerMain.layoutManager = layoutManager
+        mBinding.recyclerMain.adapter = githubAdapter.withLoadStateFooter(
+            footer = GithubLoadStateAdapter { githubAdapter.retry() }
+        )
+        githubAdapter.addLoadStateListener { loadState ->
+            mBinding.recyclerMain.isVisible = loadState.source.refresh is LoadState.NotLoading
+            mBinding.pbMain.isVisible = loadState.source.refresh is LoadState.Loading
+        }
+    }
 
+    private fun setData(){
+        mainViewModel.users.observe(this){ data ->
+            lifecycleScope.launch {
+                githubAdapter.submitData(data)
+            }
+        }
+    }
+
+    private fun setSearchUser(){
+        mBinding.svMain.setQuery("tryrenal", true)
         mBinding.svMain.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(query: String?): Boolean {
                 return true
@@ -45,19 +67,5 @@ class MainActivity : AppCompatActivity() {
                 return true
             }
         })
-
-        mainViewModel.users.observe(this){ data ->
-            lifecycleScope.launch {
-                githubAdapter.submitData(data)
-            }
-        }
-
-        mBinding.recyclerMain.adapter = githubAdapter.withLoadStateFooter(
-            footer = GithubLoadStateAdapter { githubAdapter.retry() }
-        )
-        githubAdapter.addLoadStateListener { loadState ->
-            mBinding.recyclerMain.isVisible = loadState.source.refresh is LoadState.NotLoading
-            mBinding.pbMain.isVisible = loadState.source.refresh is LoadState.Loading
-        }
     }
 }
