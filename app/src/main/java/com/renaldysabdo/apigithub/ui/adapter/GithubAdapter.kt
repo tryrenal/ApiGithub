@@ -1,9 +1,11 @@
 package com.renaldysabdo.apigithub.ui.adapter
 
+import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.renaldysabdo.apigithub.databinding.ContentUsersBinding
 import com.renaldysabdo.apigithub.domain.model.Users
 
 class GithubAdapter : PagingDataAdapter<Users, RecyclerView.ViewHolder>(diffCallback) {
@@ -25,6 +27,7 @@ class GithubAdapter : PagingDataAdapter<Users, RecyclerView.ViewHolder>(diffCall
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return GithubViewHolder(parent)
+        val itemBinding = ContentUsersBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return GithubViewHolder(itemBinding)
     }
 }

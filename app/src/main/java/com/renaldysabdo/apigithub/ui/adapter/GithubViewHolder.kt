@@ -1,25 +1,20 @@
 package com.renaldysabdo.apigithub.ui.adapter
 
-import android.view.LayoutInflater
-import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.renaldysabdo.apigithub.R
+import com.renaldysabdo.apigithub.databinding.ContentUsersBinding
 import com.renaldysabdo.apigithub.domain.model.Users
 
-class GithubViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder(
-    LayoutInflater.from(parent.context).inflate(R.layout.content_users, parent, false)
-) {
+class GithubViewHolder(
+    private val binding : ContentUsersBinding
+) : RecyclerView.ViewHolder(binding.root) {
     fun bindData(data: Users?){
-        val image = itemView.findViewById<ImageView>(R.id.img_user)
-        val name = itemView.findViewById<TextView>(R.id.tv_name_user)
+        with(binding){
+            Glide.with(itemView)
+                .load(data?.image)
+                .into(imgUser)
 
-        Glide.with(itemView)
-            .load(data?.image)
-            .into(image)
-
-        name.text = data?.name
+            tvNameUser.text = data?.name
+        }
     }
 }

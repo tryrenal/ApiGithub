@@ -20,8 +20,6 @@ class GithubLoadStateViewHolder(
     private val progress : ProgressBar = itemView.findViewById(R.id.progress_bar)
 
     init {
-
-
         btnRetry.setOnClickListener { retry.invoke() }
     }
 
