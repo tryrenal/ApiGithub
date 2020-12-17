@@ -2,14 +2,13 @@ package com.renaldysabdo.apigithub.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.ProgressBar
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.renaldysabdo.apigithub.R
+import com.renaldysabdo.apigithub.databinding.ActivityMainBinding
 import com.renaldysabdo.apigithub.ui.adapter.GithubAdapter
 import com.renaldysabdo.apigithub.ui.adapter.GithubLoadStateAdapter
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -24,19 +23,19 @@ class MainActivity : AppCompatActivity() {
     val mainViewModel : MainViewModel by viewModel()
     private val githubAdapter = GithubAdapter()
 
+    private lateinit var mBinding : ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        mBinding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(mBinding.root)
 
-        val recycler = findViewById<RecyclerView>(R.id.recycler_main)
-        val progress = findViewById<ProgressBar>(R.id.pb_main)
-        val search = findViewById<SearchView>(R.id.sv_main)
-        search.setQuery("tryrenal", true)
+        mBinding.svMain.setQuery("tryrenal", true)
 
         val layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
-        recycler.layoutManager = layoutManager
+        mBinding.recyclerMain.layoutManager = layoutManager
 
-        search.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+        mBinding.svMain.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(query: String?): Boolean {
                 return true
             }
@@ -53,12 +52,12 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        recycler.adapter = githubAdapter.withLoadStateFooter(
+        mBinding.recyclerMain.adapter = githubAdapter.withLoadStateFooter(
             footer = GithubLoadStateAdapter { githubAdapter.retry() }
         )
         githubAdapter.addLoadStateListener { loadState ->
-            recycler.isVisible = loadState.source.refresh is LoadState.NotLoading
-            progress.isVisible = loadState.source.refresh is LoadState.Loading
+            mBinding.recyclerMain.isVisible = loadState.source.refresh is LoadState.NotLoading
+            mBinding.pbMain.isVisible = loadState.source.refresh is LoadState.Loading
         }
     }
 }
